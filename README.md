@@ -30,5 +30,5 @@ c) model_simulation.py:
 4) prediction.py  
 
 # Data  
-Labelled data (used for training/validation and testing in the ratio 80:20):
+Labelled data (used for training/validation and testing in the ratio 80:20):  
 Newly predicted: 
