@@ -16,7 +16,16 @@ d)package_cnn/image_classify/images/training: contains images used for training,
 e)outputs: jjk
 
 Flow of execution of ./cnn_run.sh:
+a) clear_last.sh: moves the runs from previous training to
+b) prep_tvt.sh: splits into testing and training data; performs augmentation on training set and 
+   aug_script.sh: script for augmentation
+c) model_predict.sh: trains the model and then test the performance on test set
+d) store_data.sh: moves the results to outputs directory
 
-
+The python files are stored in image_classify/:
+a) alexnet.py: AlexNet architecture
+b) data_aug.py:
+c) model_simulation.py: 
+4) prediction.py
 
 # Data
