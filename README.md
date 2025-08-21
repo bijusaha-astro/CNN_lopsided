@@ -4,3 +4,5 @@ The project aims to create a machine-learning model using the publicly-available
 # Repository Structure
 This repository includes two main Jupyter notebooks:
 (a) 
+
+# Data
