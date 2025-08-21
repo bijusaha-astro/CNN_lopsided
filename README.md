@@ -29,4 +29,6 @@ b) data_aug.py:
 c) model_simulation.py:    
 4) prediction.py  
 
-# Data
+# Data  
+Labelled data (used for training/validation and testing in the ratio 80:20):
+Newly predicted: 
