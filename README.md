@@ -2,24 +2,6 @@
 
 This repository contains the training datasets, the best-performing model weights, a demo notebook for loading the model weight to make prediction, and catalogue of newly predicted galaxies. 
 
-## Table of Contents
-
-- [About](#about)
-- [Repository contents](#repository-contents)
-  - [Training data](#training-data)
-  - [Predictions](#predictions)
-  - [Model weights](#model-weights)
-  - [Demo notebook](#demo-notebook)
-- [Columns / Fields](#columns--fields)
-- [Usage](#usage)
-  - [Reproduce predictions (example)](#reproduce-predictions-example)
-- [Notes](#notes)
-- [Contact](#contact)
-
-## About
-
-This project provides the CSV datasets used to train and evaluate a deep learning classifier for galaxy lopsidedness and the weights for the best-performing model. Use the demo notebook to load the model and reproduce or extend the prediction pipeline on new galaxy images.
-
 ## Repository contents
 
 - Training Data
