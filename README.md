@@ -1,59 +1,123 @@
-Galaxy Lopsidedness Classification — Dataset and Model
+# Galaxy Lopsidedness Classification — Dataset and Model
 
-This repository contains the data files and model weights associated with our study on classifying lopsided and symmetric galaxies using a deep learning model.
+This repository contains the labeled datasets, model weights, and a demo notebook from our study on classifying lopsided and symmetric galaxies with a deep learning model.
 
-📁 Contents
-Training Data
+## Table of Contents
 
-Training_Lopsided.csv
+- [About](#about)
+- [Repository contents](#repository-contents)
+  - [Training data](#training-data)
+  - [Predictions](#predictions)
+  - [Model weights](#model-weights)
+  - [Demo notebook](#demo-notebook)
+- [Columns / Fields](#columns--fields)
+- [Usage](#usage)
+  - [Reproduce predictions (example)](#reproduce-predictions-example)
+- [Notes](#notes)
+- [Contact](#contact)
 
-Training_Symmetric.csv
+## About
 
-Each file contains the following columns:
+This project provides the CSV datasets used to train and evaluate a deep learning classifier for galaxy lopsidedness and the weights for the best-performing model. Use the demo notebook to load the model and reproduce or extend the prediction pipeline on new galaxy images.
 
-IAU Name
+## Repository contents
 
-SDSS PhotObjID
+- Training Data
+  - `Training_Lopsided.csv`
+  - `Training_Symmetric.csv`
+  - These two CSVs form the labeled training datasets for lopsided and symmetric galaxies.
 
-A1 (lopsidedness parameter)
+- High-confidence predictions (p ≥ 0.85)
+  - `High_confidence_predicted_lopsided.csv`
+  - `High_confidence_predicted_symmetric.csv`
+  - Lists of new galaxy predictions where the model predicted a class with probability ≥ 0.85.
 
-Environment Type
+- Lower-confidence predictions (p < 0.85)
+  - `Below_85prediction_lopsided.csv`
+  - `Below_85prediction_Symmetric.csv`
+  - Predictions where the model probability for the predicted class is below 0.85.
 
-These two CSVs form the labeled training datasets for lopsided and symmetric galaxies.
+- Model weights
+  - `best_perform.pt` — Weights of the best-performing trained model (PyTorch format).
 
-High-Confidence Predictions (p ≥ 0.85)
+- Demo notebook
+  - `model_demo.ipynb` — Demonstrates loading the trained model and generating predictions for new galaxy images.
 
-High_confidence_predicted_lopsided.csv
+## Columns / Fields
 
-High_confidence_predicted_symmetric.csv
+All CSVs share the following columns (unless otherwise noted):
 
-These files list new galaxy predictions made by the best-performing model, including:
+- `IAU Name` — International Astronomical Union designation for the galaxy.
+- `SDSS PhotObjID` — SDSS photometric object identifier.
+- `A1` — Lopsidedness parameter (provided for training files).
+- `Environment Type` — Environment classification (if available).
+- `Prediction Probability` — (prediction CSVs) Model's predicted probability for the reported class.
 
-IAU Name
+## Usage
 
-SDSS PhotObjID
+Use the provided demo notebook to reproduce predictions. Below is a minimal example showing how to load weights and run inference in PyTorch — adapt it to your model class and preprocessing pipeline.
 
-Prediction Probability (for the predicted class)
+Reproduce predictions (example)
+1. Install requirements (example):
+   - Python 3.8+
+   - PyTorch
+   - torchvision, numpy, pandas
 
-Environment Type
+2. Example PyTorch inference snippet (modify to match your model architecture and preprocessing):
 
-Lower-Confidence Predictions (p < 0.85)
+```python
+import torch
+import pandas as pd
+from torchvision import transforms
+from PIL import Image
 
-Below_85prediction_lopsided.csv
+# 1) Define or import your model class exactly as used during training
+# from model import MyModel
+# model = MyModel(...)
 
-Below_85prediction_Symmetric.csv
+# 2) Load saved weights
+state = torch.load("best_perform.pt", map_location="cpu")
+# If you saved the full model: model = state
+# If you saved state_dict:
+# model.load_state_dict(state)
 
-Same column structure as above, but containing galaxies where the model prediction probability is below 0.85.
+model.eval()
 
-Model Weights
+# 3) Example preprocessing (match training transforms)
+preprocess = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                         std =[0.229, 0.224, 0.225]),
+])
 
-best_perform.pt – Weights of the best-performing trained model.
+# 4) Load and preprocess an image
+img = Image.open("example_galaxy.jpg").convert("RGB")
+input_tensor = preprocess(img).unsqueeze(0)  # add batch dim
 
-Demo Notebook
+# 5) Run inference
+with torch.no_grad():
+    logits = model(input_tensor)
+    probs = torch.softmax(logits, dim=1)
+    predicted_class = probs.argmax(dim=1).item()
+    predicted_prob = probs.max().item()
 
-model_demo.ipynb (or your actual file name)
-Demonstrates how to load the trained model and use it to generate predictions for new galaxy images.
+print("Predicted class:", predicted_class)
+print("Probability:", predicted_prob)
+```
 
-📌 Usage
+3. Recreate CSV-style output:
+   - For each image or object, collect IAU Name, SDSS PhotObjID (if available), predicted class, prediction probability, and Environment Type.
+   - Save results with pandas to CSV for the same format as the repository files.
 
-You can load the model and reproduce the predictions by following the steps shown in the demonstration notebook. Feel free to adapt the workflow for your own datasets.
+## Notes
+
+- The repository contains the labeled training sets for the two classes (lopsided vs symmetric). The `A1` column is included in the training CSVs as the reported lopsidedness parameter used in analysis.
+- Prediction threshold of 0.85 was used to separate "high-confidence" from "lower-confidence" predictions. You can change this threshold to suit your use case.
+
+## Contact
+
+If you need help reproducing results or want the exact training code / model architecture, please contact the maintainer:
+
+- Maintainer: Your Name — email@example.com
+- Repository: https://github.com/<owner>/<repo>
