@@ -29,8 +29,8 @@ This repository contains the training datasets, the best-performing model weight
 
 All CSVs share the following columns (unless otherwise noted):
 
-- `IAU Name` — International Astronomical Union designation for the galaxy.
-- `SDSS PhotObjID` — SDSS photometric object identifier.
+- `SDSS_name` — IAU name for the galaxy.
+- `ObjID` — SDSS photometric object identifier (from .
 - `A1` — Lopsidedness parameter (provided for training files).
 - `Environment Type` — Environment classification (if available).
 - `Prediction Probability` — (prediction CSVs) Model's predicted probability for the reported class.
