@@ -33,7 +33,7 @@ All CSVs share the following columns (unless otherwise noted):
 - `ObjID` — SDSS photometric object identifier (objID from from SDSS DR18 photoObj table).
 - `A1` — Lopsidedness parameter (provided for training files).
 - `env_type` — Environment classification based on T-web classification scheme (Hahn's et al. 2007, Forero-Romero et al. 2011). C: cluster; F:filaments; Sh: Sheets; V: voids. Empty value if galaxy information is not available.
-- `L_Pred` and 'NL_pred'(for prediction csv files): Model's predicted probability for the reported class.
+- `L_Pred` and `NL_pred`(for prediction csv files): Model's predicted probability for the reported class.
 
 ## Contact
 
