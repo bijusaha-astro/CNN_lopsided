@@ -20,10 +20,10 @@ This repository contains the training datasets, the best-performing model weight
   - Predictions where the model probability for the predicted class is below 0.85.
 
 - Model weights
-  - `best_perform.pt` — weights of the best-performing trained model.
+  - `best_model.pt` — weights of the best-performing trained model.
 
 - Demo notebook
-  - `model_demo.ipynb` — Demonstrates loading the above model and generating predictions for new galaxy images.
+  - `prediction_code.ipynb` — Demonstrates loading the above model and generating predictions for new galaxy images.
 
 ## Columns / Fields
 
