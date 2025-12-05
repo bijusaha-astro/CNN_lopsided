@@ -1,6 +1,6 @@
 # Galaxy Lopsidedness Classification — Dataset and Model
 
-This repository contains the labeled datasets, model weights, and a demo notebook from our study on classifying lopsided and symmetric galaxies with a deep learning model.
+This repository contains the training datasets, the best-performing model weights, a demo notebook for loading the model weight to make prediction, and catalogue of newly predicted galaxies. 
 
 ## Table of Contents
 
