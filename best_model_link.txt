@@ -1,0 +1,2 @@
+To access the  weights for the best trained model, download the .pt file available in the google drive link below:
+https://drive.google.com/file/d/1yLXSsPREm3Adne8r5zHAPrlDTOBOF1Uv/view?usp=sharing 
