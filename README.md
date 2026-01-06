@@ -20,7 +20,7 @@ This repository contains the training datasets, the best-performing model weight
   - Predictions where the model probability for the predicted class is below 0.85.
 
 - Model weights
-  - `best_model.pt` — Link containing the best-performing trained model.
+  - `best_model_link.txt` — Link containing the best-performing trained model.
 
 - Demo notebook
   - `prediction_code.ipynb` — Demonstrates loading the above model and generating predictions for new galaxy images.
